@@ -1,0 +1,171 @@
+.section {
+    height: 100%;
+
+}
+
+.login__content {
+    width: 470px;
+    margin: 2rem auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2rem;
+
+    border-radius: 4px;
+    
+    color: #fdf4f4;
+    background: #353A47;
+}
+
+.login__content header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    row-gap: 1rem;
+
+    margin-bottom: 1.7rem;
+}
+
+.login__content header h1 {
+    font-size: 2.5rem;
+}
+
+.login__content header p {
+    font-size: 1.6rem;
+    font-weight: 400;
+    font-style: italic;
+
+}
+
+.login__content form {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+
+}
+
+.login__content form label {
+    display: flex;
+    flex-direction: column;
+
+    row-gap: 0.6rem;
+
+    height: 5.5rem;
+}
+
+.login__content form label span {
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.login__content .inputs {
+    padding: 0.8rem;
+    height: 100%;
+    outline: none;
+    border: none;
+
+    border-radius: 4px;
+}
+
+.login__content .inputs:focus {
+    outline:1px solid crimson;
+}
+
+.login__content button[type="submit"] {
+    align-self: flex-end;
+    width: 160px;
+
+    padding: 1rem 0.9rem;
+    margin-top: 1.5rem;
+
+    border: none;
+    border-radius: 4px;
+
+    color: #fdf4f4;
+    background: #2BA84A;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    opacity: .9;
+}
+
+.login__content button[type="submit"]:hover {
+    opacity: 1;
+}
+
+.error {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 800;
+    font-style: italic;
+
+    margin-top: 1rem;
+
+    color: rgb(244, 23, 67);
+}
+
+@media (max-width: 562px) {
+    .login__content {
+        width: 430px;
+    }
+}
+
+@media (max-width: 506px) {
+    .login__content {
+        width: 400px;
+    }
+}
+
+@media (max-width: 440px) {
+    .login__content {
+        width: 370px;
+    }
+}
+
+@media (max-width: 400px) {
+    .login__content {
+        width: 350px;
+    }
+}
+
+@media (max-width: 370px) {
+    .login__content {
+        width: 320px;
+    }
+}
+
+@media (max-width: 345px) {
+    .login__content {
+        width: 300px;
+    }
+}
+
+@media (max-width: 322px) {
+    .login__content {
+        width: 280px;
+    }
+}
+
+@media (max-width: 305px) {
+    .login__content {
+        width: 270px;
+    }
+}
+
+
+@media (max-width: 285px) {
+    .login__content {
+        width: 260px;
+    }
+}
+
