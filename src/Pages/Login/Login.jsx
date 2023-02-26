@@ -5,28 +5,30 @@ import styles from "./Login.module.css";
 import { isAuth } from "../../utils/isAuth";
 
 // context
-
 import { useAuthContext } from "../../contexts/authContext";
 import { useEffect } from "react";
 
+// auth
+import { useSaveLocalStorage } from "../../hooks/useLocalStorage";
+
 const Login = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassowrd] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const { user, setUser, authorization, setAuthorization } = useAuthContext();
-
-  const userTry = {
-    email,
-    password,
-  };
+  const { userEmail, setEmailUser, username, setUsername } = useAuthContext();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     // Validando os inputs:
+    if (!name || name.length < 3) {
+      setError("Digite um nome válido");
+      return;
+    }
 
     if (password.length < 5) {
       setError("Por favor a senha deve ter ao menos 5 caracteres.");
@@ -37,18 +39,18 @@ const Login = () => {
       setError("Por favor digite um e-mail válido.");
       return;
     }
-
-    // Criando um localstorage com user: Email
-    localStorage.setItem("user", userTry.email);
-    // Criando um localstorage com estado do usuário: autorizado
-    localStorage.setItem("logado", true);
-
-    // Autorizando o usuário  a entrar no sistema.
-    setAuthorization(localStorage.getItem("logado"));
-
-    // Mandando o usuário para o home ao logar.
-    navigate("/");
+    // Salvando o usuário no localStorage e logando ele
+    useSaveLocalStorage(email, name, true);
+    setEmailUser(email);
+    setUsername(name);
   };
+
+  // verificando o se o usuário está logado:
+  useEffect(() => {
+    if (userEmail) {
+      navigate("/");
+    }
+  }, [userEmail]);
 
   return (
     <section className={styles.section}>
@@ -58,6 +60,17 @@ const Login = () => {
           <p>Realize login para continuar.</p>
         </header>
         <form onSubmit={handleSubmit}>
+          <label>
+            <span>Usuário:</span>
+            <input
+              type="text"
+              name="username"
+              value={name}
+              onChange={({ target }) => setName(target.value)}
+              autoComplete="off"
+              className={styles.inputs}
+            />
+          </label>
           <label>
             <span>E-mail:</span>
             <input

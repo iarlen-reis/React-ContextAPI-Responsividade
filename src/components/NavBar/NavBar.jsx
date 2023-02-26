@@ -1,27 +1,29 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import styles from "./NavBar.module.css";
 
 import { useAuthContext } from "../../contexts/authContext";
 import { CgMenuRightAlt } from "react-icons/cg";
 import { IoCloseSharp } from "react-icons/io5";
-import styles from "./NavBar.module.css";
-import { useState } from "react";
+
+import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import { useRemoveLocalStorage } from "../../hooks/useLocalStorage";
 
 const NavBar = () => {
   const [isMobile, setIsmobile] = useState(false);
+  const navigate = useNavigate();
 
   // Pegando  context do usuário e estado dele:
-  const { user, setAuthorization } = useAuthContext();
+  const { auth, setAuth } = useAuthContext();
 
-  // Removendo usuário e estado do localstorage ao clicar em sair:
+  // Deslogando o usuário e apagando o localStorage ao clicar em sair:
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("logado");
-    setAuthorization(localStorage.getItem("logado"));
+    setAuth(false);
+    useRemoveLocalStorage();
 
+    navigate("/login");
     setIsmobile(!isMobile);
   };
-
   return (
     <aside className={styles.aside}>
       <nav className={isMobile ? styles.isMobile : styles.closed}>
@@ -29,14 +31,14 @@ const NavBar = () => {
           Auth<span>Context</span>
         </NavLink>
         <ul>
-          {!user && (
+          {!auth && (
             <li>
               <NavLink to="/login" onClick={() => setIsmobile(!isMobile)}>
                 Entrar
               </NavLink>
             </li>
           )}
-          {user && (
+          {auth && (
             <li>
               <button onClick={handleLogout}>Sair</button>
             </li>
